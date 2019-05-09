@@ -4,6 +4,7 @@
 // ******************************************************************************
 // *** Dependencies
 // =============================================================
+require("dotenv").config();
 var express = require("express");
 
 // Sets up the Express App
@@ -33,7 +34,7 @@ app.set("view engine", "handlebars");
 // require("./routes/post-api-routes.js")(app);
 require("./controllers/burgers_controller.js")(app);
 
-require("dotenv").config();
+
 // Set up MySQL connection.
 //var mysql = require("mysql");
 //var connection; 
