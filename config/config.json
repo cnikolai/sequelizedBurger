@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": process.env.DATABASE_PASSWORD,
+    "password": "process.env.DATABASE_PASSWORD",
     "database": "sequelizedBurger_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -15,9 +15,10 @@
   },
   "production": {
     "username": "root",
-    "password": process.env.DATABASE_PASSWORD,
-    "database": "sequelizedBurger_db",
-    "host": process.env.JAWSDB_URL,
+    "password": "process.env.JAWS_DATABASE_PASSWORD",
+    "use_env_variable": "JAWSDB_URL",
+    "database": "uu3cvtzxiwd85ly1",
+    "host": "gzp0u91edhmxszwf.cbetxkdyhwsb.us",
     "dialect": "mysql"
   }
 }
