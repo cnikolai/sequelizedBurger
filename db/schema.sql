@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS burgers_db;
+DROP DATABASE IF EXISTS sequelizedBurger_db;
 
-CREATE DATABASE burgers_db;
+CREATE DATABASE sequelizedBurger_db;
 
-use burgers_db;
+use sequelizedBurger_db;
 
 CREATE TABLE burgers (
 	id integer primary key auto_increment, 

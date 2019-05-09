@@ -1,45 +1,34 @@
-var express = require("express");
+// Import the model to use its database functions.
+var db = require("../models");
 
-var router = express.Router();
-
-// Import the model (cat.js) to use its database functions.
-var burger = require("../models/burger.js");
-
-// Create all our routes and set up logic within those routes where required.
-router.get("/", function(req, res) {
-  burger.selectAll(function(data) {
-    var hbsObject = {
-      burgers: data
-    };
-    console.log(hbsObject);
-    res.render("index", hbsObject);
+module.exports = function(app) {
+  app.get("/", function(req, res) {
+    db.Burger.findAll({}).then(function(data) {
+      var hbsObject = {
+        burgers: data
+      };
+      //console.log("data:", data);
+      //console.log("hbsObject: ",hbsObject);
+      res.render("index", hbsObject);
+    });
   });
-});
 
-router.post("/api/burgers", function(req, res) {
-  burger.insertOne("burger_name",req.body.name, function(result) {
-    // Send back the ID of the new burger
-    //res.json({ id: result.insertId });
-    res.redirect("/");
+  app.post("/api/burgers", function(req, res) {
+    db.Burger.create({burger_name: req.body.name}).then(function(dbBurger) {
+      res.json(dbBurger);
+    });
   });
-});
 
-router.put("/api/burgers/:id", function(req, res) {
-  var condition = "id = " + req.params.id;
-
-  console.log("condition: ", condition);
-
-  burger.updateOne("devoured", "true",condition, function(result) {
-    if (result.changedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    } else {
-      res.status(200).send("");
-    }
-    //res.redirect("/");
+  app.put("/api/burgers/:id", function(req, res) {
+    var id = req.params.id;
+    db.Burger.update(
+      {devoured: true},
+      {
+        where: {
+          id: id
+        }
+      }).then(function(dbBurger) {
+      res.json(dbBurger);
+    });
   });
-  
-});
-
-// Export routes for server.js to use.
-module.exports = router;
+};
