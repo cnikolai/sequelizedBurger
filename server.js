@@ -35,13 +35,13 @@ require("./controllers/burgers_controller.js")(app);
 
 require("dotenv").config();
 // Set up MySQL connection.
-var mysql = require("mysql");
-var connection; 
+//var mysql = require("mysql");
+//var connection; 
 
-if (process.env.JAWSDB_URL) {
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
-}
-else {
+// if (process.env.JAWSDB_URL) {
+//   connection = mysql.createConnection(process.env.JAWSDB_URL);
+// }
+// else {
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync().then(function() {
@@ -49,4 +49,4 @@ db.sequelize.sync().then(function() {
     console.log("App listening on PORT " + PORT);
   });
 });
-}
+// }
